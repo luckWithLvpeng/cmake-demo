@@ -1,0 +1,28 @@
+
+if (NOT @LIB_NAME@_FIND_COMPONENTS)
+    set(@LIB_NAME@_NOT_FOUND_MESSAGE "The @LIB_NAME@ package requires at least one component")
+    set(@LIB_NAME@_FOUND False)
+    return()
+endif()
+
+set(_@LIB_NAME@_FIND_PARTS_REQUIRED)
+if (@LIB_NAME@_FIND_REQUIRED)
+    set(_@LIB_NAME@_FIND_PARTS_REQUIRED REQUIRED)
+endif()
+
+set(_@LIB_NAME@_FIND_PARTS_QUIET)
+if (@LIB_NAME@_FIND_QUIETLY)
+    set(_@LIB_NAME@_FIND_PARTS_QUIET QUIET)
+endif()
+
+get_filename_component(_@LIB_NAME@_install_prefix "${CMAKE_CURRENT_LIST_DIR}" ABSOLUTE)
+
+set(_@LIB_NAME@_module_paths ${_@LIB_NAME@_install_prefix})
+
+foreach(module ${@LIB_NAME@_FIND_COMPONENTS})
+    find_package(${module}
+        ${_@LIB_NAME@_FIND_PARTS_QUIET}
+        ${_@LIB_NAME@_FIND_PARTS_REQUIRED}
+        PATHS ${_@LIB_NAME@_module_paths} NO_DEFAULT_PATH
+    )
+endforeach()
