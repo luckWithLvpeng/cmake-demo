@@ -1,1 +1,1 @@
-# Modern CMake
+# Modern CMake model
