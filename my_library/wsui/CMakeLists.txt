@@ -27,6 +27,7 @@ target_include_directories(${PROJECT_NAME}
             $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
             $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/headers>
         PRIVATE
+	$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}>
         )
 target_sources(${PROJECT_NAME} 
     PUBLIC
